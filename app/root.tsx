@@ -22,11 +22,13 @@ import appStylesHref from "./app.css";
 
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect } from "react";
+import styles from "./tailwind.css"
+import { Button } from "./components/ui/button";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: appStylesHref },
-];
-
+  { rel: "stylesheet", href: styles },
+  ...(appStylesHref ? [{ rel: "stylesheet", href: appStylesHref }] : []),
+]
 export const action = async () => {
   const contact = await createEmptyContact();
   return redirect(`/contacts/${contact.id}/edit`);
@@ -85,7 +87,7 @@ export default function App() {
               <div id="search-spinner" aria-hidden hidden={!searching}/>
             </Form>
             <Form method="post">
-              <button type="submit">New</button>
+              <Button type="submit">New</Button>
             </Form>
           </div>
           <nav>
